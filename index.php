@@ -10,7 +10,11 @@
 </head>
 <body>
     <header>
-        <p>Bara cu userul logat si chestii.</p>
+        <div id="logo">OnCo</div>
+        <div id="user_control">
+Test
+        </div>
+        <div style="clear:both"></div>
     </header>
     <nav>
         <p>Meniu cu navigatie, ma gandesc ce punem aici.</p>

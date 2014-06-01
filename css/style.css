@@ -60,3 +60,28 @@ footer {
     border-right: 2px solid rgb(223, 224, 228);
     border-left: 2px solid rgb(223, 224, 228);
 }
+
+#logo{
+    float:left;
+    font-family: Impact, Charcoal, sans-serif;
+    font-size: 40px;
+    padding: 0 7px;
+}
+
+#user_control{
+    float:right;
+}
+
+.signin_button{
+    position:relative;
+    padding: 3px;
+    border-radius: 3px;
+    border:1px solid;
+    margin:9px;
+    padding: 5px;
+    background-color: #e1e1e1;
+}
+.signin_button a, .signin_button a:visited, .signin_button a:hover, .signin_button a:active {
+    color: inherit;
+    text-decoration: none;
+}
