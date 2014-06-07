@@ -26,7 +26,7 @@
     <p>Aici punem Contactele.</p>
 </section>
 <footer>
-    <p>Footer cu copyright.</p>
+    <p>OnCo - Albert Chmilevski and Adrian Sandru - June 2014</p>
 </footer>
 </body>
 </html>
