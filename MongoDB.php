@@ -77,17 +77,7 @@ class MongoDataBase {
         return $var;
     }
 
-}
-
-   /* function connect() {
-
-        $con = new MongoClient();
-        $this->database = $con->newDb;
-        $this->collection = $this->database->AccountUsers;
+    public function getUserContacts(UserAccount $account) {
+        return $account->getContacts();
     }
-
-    function updateData($person, $personUpdate){
-
-        $this->collection->update(array($person, array('$set'=>array($personUpdate))));
-    }*/
-
+}

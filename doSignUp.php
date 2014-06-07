@@ -24,5 +24,3 @@ $account = new UserAccount($username,$password,$email);
     }else {
             $t->createAccount($account);
     }
-
-?>
