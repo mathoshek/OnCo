@@ -29,10 +29,10 @@
         </div>
     </div>
     <div id="signUp">
-        <form id="signUpForm">
-            <input type="text" value="Username"/>
-            <input type="email" value="Email"/>
-            <input type="password" value="Password"/>
+        <form id="signUpForm" action="doSignUp.php" method="post">
+            <input type="text" name = "username" value="Username"/>
+            <input type="email" name = "email" value="Email"/>
+            <input type="password" name = "password" value="Password"/>
             <input type="submit" value="Sign Up"/>
         </form>
     </div>

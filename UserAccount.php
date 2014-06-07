@@ -1,7 +1,7 @@
 <?php
 
-require "MongoDB.php";
-require "Contact.php";
+//require "MongoDB.php";
+//require "Contact.php";
 
 class UserAccount {
 
@@ -25,7 +25,7 @@ class UserAccount {
 
 
 /*teste*/
-$ab = new MongoDataBase;
+/*$ab = new MongoDataBase;
 $ab->connect();
 
 for($index = 0; $index < 10; $index++)
@@ -51,5 +51,5 @@ foreach($cursor as $findIndex){
 foreach($cursor as $findIndex){
     $ab->deleteData($findIndex);
 }
-
+*/
 
