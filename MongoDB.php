@@ -4,8 +4,8 @@ require "UserAccount.php";
 
 class MongoDataBase {
 
-    protected  $database = "";
-    protected  $collection = "";
+     protected $database   = "";
+     protected $collection = "";
 
     // SingletonMongoDb
     //  - bool isValidAccount(UserAccount $account);
