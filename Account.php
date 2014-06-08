@@ -1,6 +1,6 @@
 <?php
 
-require_once 'MongoDB.php';
+require_once 'MongoDatabase.php';
 
 define('ACCOUNTS_DOCUMENT', 'accounts');
 define('ACCOUNT_USERNAME', 'username');
