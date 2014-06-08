@@ -1,7 +1,7 @@
 <?php
 
 
-require "UserAccount.php";
+require "Account.php";
 require "Contact.php";
 
 $account = new UserAccount("add","md5","a@aa");

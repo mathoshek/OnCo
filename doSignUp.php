@@ -1,27 +1,17 @@
 <?php
 
-require "MongoDB.php";
+require_once 'Account.php';
+
+session_start();
 
 $username = $_REQUEST["username"];
 $email = $_REQUEST["email"];
 $password = $_REQUEST["password"];
 
-$t = MongoDataBase::getInstance();
-
-if(!$t->validField("username", $username))
-    die("invalid username");
-
-if(!$t->validField("password", $password))
-    die("invalid password");
-
-if(!$t->validField("username", $email))
-    die("invalid email");
-
-$account = new UserAccount($username,$password,$email);
-
-    if($t->isValidAccount($account) === TRUE) {
-            echo "account already exist!";
-    }else {
-            $t->createAccount($account);
-    }
-
+$accountExists = Account::get($username) != null;
+if ($accountExists == false) {
+    Account::put($username, $password, $email);
+    $_SESSION['user'] = $username;
+} else
+    $_SESSION['errorUsernameExists'] = 'Username exists';
+header('Location: index.php');
