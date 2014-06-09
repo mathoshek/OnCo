@@ -1,6 +1,8 @@
 <?php
 
 require_once 'MongoDatabase.php';
+require_once 'Contact.php';
+require_once 'MyLogPHP-1.2.1.class.php';
 
 define('ACCOUNTS_DOCUMENT', 'accounts');
 define('ACCOUNT_USERNAME', 'username');
@@ -23,7 +25,7 @@ class Account
         $mongoDb = MongoDatabase::getInstance();
         $cursor = $mongoDb->getDocument(ACCOUNTS_DOCUMENT)->find(array(ACCOUNT_USERNAME => $username));
 
-        if ($cursor->count() == 0)
+        if ($cursor->count() != 1)
             return null;
 
         $doc = $cursor->getNext();
@@ -34,7 +36,11 @@ class Account
         $account->username = $doc[ACCOUNT_USERNAME];
         $account->password = $doc[ACCOUNT_PASSWORD];
         $account->email = $doc[ACCOUNT_EMAIL];
-        $account->contacts = $doc[ACCOUNT_CONTACTS];
+
+        foreach ($doc[ACCOUNT_CONTACTS] as $contactId) {
+            $account->contacts[(string)$contactId] = Contact::get($contactId);
+        }
+
         $account->groups = $doc[ACCOUNT_GROUPS];
 
         return $account;
@@ -53,27 +59,26 @@ class Account
         MongoDatabase::getInstance()->getDocument(ACCOUNTS_DOCUMENT)->insert($doc);
     }
 
-    public function createContact()
+    public function addContact(Contact $contact)
     {
-        $contact = new Contact(this);
-        $contact->setFirstName("");
-        $contact->setLastName("");
-        $contact->setJob("");
-        $contact->setBirthday("");
-        $contact->setPhoneNumber("");
-        $contact->setDescription("");
-        $contact->setEmail("");
+        $log = new MyLogPHP();
+        $log->info($contact->getId());
+
+        MongoDatabase::getInstance()->getDocument(ACCOUNTS_DOCUMENT)->update(array('_id' => new MongoId($this->_id)), array('$push' => array(ACCOUNT_CONTACTS => $contact->getId())));
+        $this->contacts[(string)$contact->getId()] = $contact;
     }
 
-    public function getAllContacts(){
-        return $this->contacts;
+    public function getAllContacts()
+    {
+        return array_values($this->contacts);
     }
 
-    public function getContacts(ContactsFilter $filter){
+    public function getContacts(ContactsFilter $filter)
+    {
         $filteredContacts = array();
 
-        foreach($this->contacts as $contact){
-            if($contact->matches($filter))
+        foreach ($this->contacts as $contact) {
+            if ($contact->matches($filter))
                 array_push($filteredContacts, $contact);
         }
 
