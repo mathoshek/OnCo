@@ -57,7 +57,27 @@ class Account
     {
         $contact = new Contact(this);
         $contact->setFirstName("");
+        $contact->setLastName("");
+        $contact->setJob("");
+        $contact->setBirthday("");
+        $contact->setPhoneNumber("");
+        $contact->setDescription("");
+        $contact->setEmail("");
+    }
 
+    public function getAllContacts(){
+        return $this->contacts;
+    }
+
+    public function getContacts(ContactsFilter $filter){
+        $filteredContacts = array();
+
+        foreach($this->contacts as $contact){
+            if($contact->matches($filter))
+                array_push($filteredContacts, $contact);
+        }
+
+        return $filteredContacts;
     }
 
     function getUsername()

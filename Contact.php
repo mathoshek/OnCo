@@ -24,6 +24,12 @@ class Contact
 
     private $account;
 
+    public function matches(ContactsFilter $filter)
+    {
+        // Cod de filtru
+        // returneaza true sau false
+    }
+
     public function __construct(Account $account)
     {
         $this->account = $account;
