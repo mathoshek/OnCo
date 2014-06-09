@@ -26,8 +26,16 @@ class Contact
 
     public function matches(ContactsFilter $filter)
     {
-        // Cod de filtru
-        // returneaza true sau false
+        $ret = FALSE;
+        foreach($filter->getFilters() as $key => $filterVal) {
+
+                if(strcmp(strtolower($this->$key),strtolower($filterVal)) !== 0)
+                    $ret = FALSE;
+                else
+                    $ret = TRUE;
+
+        }
+        return $ret;
     }
 
     public function __construct(Account $account)
