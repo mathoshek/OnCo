@@ -17,11 +17,17 @@ $con1->setJob("programator");
 
 $conFil = new ContactsFilter();
 
-$conFil->addLastNameFilter($con1->getLastName());
-$con1->matches($conFil);
+$conFil->addLastNameFilter("adrian");
 $conFil->addFirstNameFilter($con1->getFirstName());
-$con1->matches($conFil);
-$conFil->addBirthdayFilter($con1->getBirthday());
+$conFil->addHobbyFilter("pescar");
+$conFil->addJobFilter("programator");
+if($con1->matches($conFil))
+        echo ' merge';
+else
+        echo 'nu merge';
+
+
+/* $conFil->addBirthdayFilter($con1->getBirthday());
 $con1->matches($conFil);
 $conFil->addEmailFilter($con1->getEmail());
 $con1->matches($conFil);
@@ -31,3 +37,4 @@ $conFil->addPhoneNumberFilter($con1->getPhoneNumber());
 $con1->matches($conFil);
 $conFil->addJobFilter($con1->getJob());
 $con1->matches($conFil);
++/
