@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+require_once 'Account.php';
+require_once 'Contact.php';
+
 if (!isset($_SESSION['user'])) {
     ?>
 
@@ -78,7 +81,17 @@ if (!isset($_SESSION['user'])) {
         <p>Aici vor aparea grupurile de contacte</p>
     </aside>
     <section id="contentLoggedIn">
-        <p>Aici punem Contactele.</p>
+        <p><a href='doAddContact.php'>Add a new Contact</a></p>
+        <br />
+        <?php
+        $account = Account::get($_SESSION['user']);
+
+        foreach ($account->getAllContacts() as $mongoId => $contact) {
+            $name = $contact->getFirstName() . " " . $contact->getLastName();
+            $phoneNumber = $contact->getPhoneNumber();
+            echo "<p>$name | $phoneNumber | <a href=\"editContact.php?contactId=$mongoId\">Edit</a> | <a href=\"doDeleteContact.php?contactId=$mongoId\">Delete</a></p>";
+        }
+        ?>
     </section>
     <footer>
         <p>OnCo - Albert Chmilevski and Adrian Sandru - June 2014</p>

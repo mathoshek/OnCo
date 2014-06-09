@@ -2,7 +2,6 @@
 
 require_once 'MongoDatabase.php';
 require_once 'Contact.php';
-require_once 'MyLogPHP-1.2.1.class.php';
 
 define('ACCOUNTS_DOCUMENT', 'accounts');
 define('ACCOUNT_USERNAME', 'username');
@@ -61,16 +60,21 @@ class Account
 
     public function addContact(Contact $contact)
     {
-        $log = new MyLogPHP();
-        $log->info($contact->getId());
-
         MongoDatabase::getInstance()->getDocument(ACCOUNTS_DOCUMENT)->update(array('_id' => new MongoId($this->_id)), array('$push' => array(ACCOUNT_CONTACTS => $contact->getId())));
         $this->contacts[(string)$contact->getId()] = $contact;
     }
 
+    public function deleteContact(MongoId $_id)
+    {
+        MongoDatabase::getInstance()->getDocument(ACCOUNTS_DOCUMENT)->update(array('_id' => new MongoId($this->_id)), array('$pull' => array(ACCOUNT_CONTACTS => $_id)));
+        MongoDatabase::getInstance()->getDocument(CONTACTS_DOCUMENT)->remove(array('_id' => $_id));
+
+        unset($this->contacts[(string)$_id]);
+    }
+
     public function getAllContacts()
     {
-        return array_values($this->contacts);
+        return $this->contacts;
     }
 
     public function getContacts(ContactsFilter $filter)
