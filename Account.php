@@ -53,6 +53,13 @@ class Account
         MongoDatabase::getInstance()->getDocument(ACCOUNTS_DOCUMENT)->insert($doc);
     }
 
+    public function createContact()
+    {
+        $contact = new Contact(this);
+        $contact->setFirstName("");
+
+    }
+
     function getUsername()
     {
         return $this->username;
