@@ -81,7 +81,7 @@ if (!isset($_SESSION['user'])) {
         <p class="button"><a href='doAddContact.php'>Add a new Contact</a></p>
         <p class="button"><a href='filterContacts.php'>Filter Contacts</a></p>
     </aside>
-    <section id="contentLoggedIn">
+    <section id="contentLoggedIn" style="padding:10px">
         <table style="width:100%;">
             <tr>
                 <th>First Name</th>

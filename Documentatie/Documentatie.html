@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documentie</title>
+<link href="docstyle.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<div id = "content">
+  <div id="logo">
+  </div>
+  <div id="header">	
+    <div align="center">
+      <h1><strong>Online Contacts</strong></h1>
+      <h4>Paul Albert Chmilevski<br />
+      	  Adrian Sandru</h4>
+      <p>
+      	<br />
+        Facultatea de Informatică, Universitatea Alexandru Ioan Cuza, Iaşi <br />
+		paul.chmilevski@info.uaic.ro <br />
+		adrian.sandru@info.uaic.ro
+      </p>
+    </div>
+  </div>
+  <div id="menu">
+  <ul>
+  <li><a href="#introducere">Introducere</a></li>
+  <li><a href="#tehnologii">Tehnologii</a></li>
+  <li><a href="#arhitectura">Arhitectura</a></li>
+  <li><a href="#implementare">Implementare</a></li>
+  <li><a href="#concluzie">Concluzie</a></li>
+  <li><a href="#bibliografie">Bibliografie</a></li>
+ </ul>
+  </div>
+  <div id ="info">
+
+    <h3>Introducere</h3>
+      <p id="introducere" align="justify">
+        Aceasta lucrare propune o solutie pentru paradigma client server in cadrul tehnologiilor web, prin realizarea
+        unei aplicatii ce gestioneaza contactele personale online. Pe baza unui login sau prin crearea unui nou count valid,
+        clientii se vor conecta la un server web pe baza unui login, acest avand posibiltatea sa gestioneze propria agenda dupa bunul plac.
+        Clientul va fi capabil sa adauge contacte, sa stearga contacte, sa caute contacte dupa anumite criterii
+        (job, varsta, nume, prenume etc) Accentul se pune pe cererile clientului şi modul în care sunt tratate acestea si cum sunt rezolvate de catre server.
+      </p>
+      <h3>Tehnologii</h3>
+        <h4>HTML 5 si CSS3</h4>
+      <p id="tehnologii" align="justify">
+       HTML5 este esential in dezvoltarea aplicatiei deoarece este un limbaj pentru structurarea si prezentarea continutului pentru web
+       Cu ajutorul acestui limbaj se creaza interfata grafica, partea vizuala a aplicatiei. Fiecarui tag ii este asociat un id unic, astfel incat pentru
+       fiecare tag in partea sa i se poata aplica anumite modele grafice cu ajutorul CSS-ului.
+       Aceste doua limbaje lucreaza foarte bine impreuna, asftel incat HTML-ul si CSS-ul utilizate impreuna pot oferi un mediu online cat mai atractiv,
+       interesant dar si placut in acelasi timp.</p>
+	<h4> PHP </h4>
+    Pentru partea de backend a aplicatie se recurge la un limbaj precum este PHP. Ne ajuta la creare unei sesiunei pentru un utilizator : clientul se conecteaza, se deschide o sesiune, aceste solicita cereri din partea serverului, iar in momentul cand s-a deconectat aceasta sesiune este inchisa; ofera posibilitatea de creare de clase si de instantiere a obiectelor a acestor clase, pentru a veni in ajutorul programatorului de a scrie cod modularizat astfel orice solicitare de update sa se poata realiza in cel mai scurt timp, ofera anumite functii predefinite care vin in ajutorul dezvoltarii acestei aplicatii.
+ 	<h4>Mongo Database</h4>
+    Pentru stocarea si managementul datelor, se utilizeaza MongoDB. MongoDB este o baza de date NoSQL open-source orientata pe documente. Diferenta principala consta in faptul ca stocarea datelor nu se face folosind tabele precum intr-o baza de date relationala, MongoDB stocheaza datele sub forma de documente JSON cu schemes dinamice. Acest tip de baza de date vine cu urmatoarele facilitati:
+    + baza de date stocheaza obiecte. Aceste documente reduc forma de join
+    + lipsa joinurilor face ca interogarile distribuite sa fie rapide
+    + indexarea se face asupra cheilor de regasire ale documentelor
+    + MongoDB foloseste map/reduce pentru agregare si procesare
+
+      <h3>Arhitectura</h3>
+    <p id = "arhitectura" align="justify">
+       
+    </p>
+      <h3>Implementare</h3>
+  <p id = "implementare" align="justify">
+ 	In momentul in care user-ul incearca sa se conecteze, mai intai se verifica daca datele sunt valide.
+    Daca aceste date sunt valide, atunci user-ul are acces la contactele sale.
+    Aceste actiuni sunt procesate in felul urmator:
+    1. Se creaza un obiect de tip account
+      $account = Account::get($_POST['username']);
+    2. Se verifica daca existanta account-ul:
+            a) Daca account-ul nu exista se transmite un mesaj la utilizator
+
+      if ($account == null) {
+      $_SESSION['errorAccountDoesntExist'] = 'Account doesn\'t exist.';
+      header('Location: login.php');
+            b) Daca account exista se verifica username-ul si parola
+      if ($account == null) {
+      $_SESSION['errorAccountDoesntExist'] = 'Account doesn\'t exist.';
+      header('Location: login.php');
+    </p>
+      <h3>Concluzie</h3>
+    <p id = "concluzie"   align="center">
+        Momentan aplicatia se afla în faza de release avand implementate doar anumite functionalitati.
+        Directia spre care se indreapta este cea de a oferi utilizatorilor o interfata cat mai dinamica, atractiva, usor de utilizat si
+        pe intelesul tuturor, astfel incat orice persoana sa se poata bucura de aplicatie.
+   </p>
+      <h3>Bibliografie</h3>
+   	<p id = "bibliografie" align="center">
+        Cursurile si laboratoarele de tehnologii web : http://profs.info.uaic.ro/~busaco/teach/courses/web/web-film.html
+        Documentatie HTML si CSS : http://docs.webplatform.org/wiki/beginners
+        Documentatie PHP : https://php.net//manual/en/index.php
+        Documentatie MongoDB : http://docs.mongodb.org/manual/
+    </p>
+   </div>
+</div>
+</body>
+</html>
