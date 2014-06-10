@@ -33,7 +33,8 @@ class Contact
             CONTACT_BIRTHDAY => "",
             CONTACT_PHONE_NUMBER => "",
             CONTACT_DESCRIPTION => "",
-            CONTACT_EMAIL => ""
+            CONTACT_EMAIL => "",
+            CONTACT_HOBBY => ""
         );
 
         $ok = MongoDatabase::getInstance()->getDocument(CONTACTS_DOCUMENT)->insert($contactArray);
@@ -64,6 +65,7 @@ class Contact
         $contact->phoneNumber = $doc[CONTACT_PHONE_NUMBER];
         $contact->description = $doc[CONTACT_DESCRIPTION];
         $contact->email = $doc[CONTACT_EMAIL];
+        $contact->hobby = $doc[CONTACT_HOBBY];
 
         return $contact;
     }
@@ -77,7 +79,7 @@ class Contact
     {
         $ret = true;
         foreach ($filter->getFilters() as $key => $filterVal) {
-            if (strpos(strtolower((string)$this->$key), strtolower((string)$filterVal)) !== false) {
+            if (strpos(strtolower($this->$key), strtolower($filterVal)) !== false) {
                 $ret = $ret && true;
             } else {
                 $ret = $ret && false;

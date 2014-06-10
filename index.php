@@ -71,48 +71,72 @@ if (!isset($_SESSION['user'])) {
     <header>
         <div id="logo">OnCo</div>
         <div id="user_control">
-            <p></p><a href="doSignOut.php">Sign Out</a></p>
+            <div class="signout_button">
+                <a href="doSignOut.php">Sign Out</a>
+            </div>
         </div>
         <div style="clear:both"></div>
     </header>
-    <nav>
-        <p>Meniu cu navigatie, ma gandesc ce punem aici.</p>
-    </nav>
     <aside>
-        <p>Aici vor aparea grupurile de contacte</p>
+        <p class="button"><a href='doAddContact.php'>Add a new Contact</a></p>
+        <p class="button"><a href='filterContacts.php'>Filter Contacts</a></p>
     </aside>
     <section id="contentLoggedIn">
-        <p><a href='doAddContact.php'>Add a new Contact</a></p>
-        <p><a href='filterContacts.php'>Filter Contacts</a></p>
-        <br />
-        <?php
-        $filter = new ContactsFilter();
-        if(isset($_GET['firstName']) && !empty($_GET['firstName']))
-            $filter->addFirstNameFilter($_GET['firstName']);
-        if(isset($_GET['lastName']) && !empty($_GET['lastName']))
-            $filter->addFirstNameFilter($_GET['lastName']);
-        if(isset($_GET['job']) && !empty($_GET['job']))
-            $filter->addFirstNameFilter($_GET['job']);
-        if(isset($_GET['birthday']) && !empty($_GET['birthday']))
-            $filter->addFirstNameFilter($_GET['birthday']);
-        if(isset($_GET['phoneNumber']) && !empty($_GET['phoneNumber']))
-            $filter->addFirstNameFilter($_GET['phoneNumber']);
-        if(isset($_GET['hobby']) && !empty($_GET['hobby']))
-            $filter->addFirstNameFilter($_GET['hobby']);
-        if(isset($_GET['description']) && !empty($_GET['description']))
-            $filter->addFirstNameFilter($_GET['description']);
-        if(isset($_GET['email']) && !empty($_GET['email']))
-            $filter->addFirstNameFilter($_GET['email']);
+        <table style="width:100%;">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Job</th>
+                <th>Birthday</th>
+                <th>Phone Number</th>
+                <th>Hobby</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+            <?php
+            $filter = new ContactsFilter();
+            if (isset($_GET['firstName']) && !empty($_GET['firstName']))
+                $filter->addFirstNameFilter($_GET['firstName']);
+            if (isset($_GET['lastName']) && !empty($_GET['lastName']))
+                $filter->addLastFilter($_GET['lastName']);
+            if (isset($_GET['job']) && !empty($_GET['job']))
+                $filter->addJobFilter($_GET['job']);
+            if (isset($_GET['birthday']) && !empty($_GET['birthday']))
+                $filter->addBirthdayFilter($_GET['birthday']);
+            if (isset($_GET['phoneNumber']) && !empty($_GET['phoneNumber']))
+                $filter->addPhoneNumberFilter($_GET['phoneNumber']);
+            if (isset($_GET['hobby']) && !empty($_GET['hobby']))
+                $filter->addHobbyFilter($_GET['hobby']);
+            if (isset($_GET['description']) && !empty($_GET['description']))
+                $filter->addDescriptionFilter($_GET['description']);
+            if (isset($_GET['email']) && !empty($_GET['email']))
+                $filter->addEmailFilter($_GET['email']);
 
 
-        $account = Account::get($_SESSION['user']);
+            $account = Account::get($_SESSION['user']);
 
-        foreach ($account->getContacts($filter) as $mongoId => $contact) {
-            $name = $contact->getFirstName() . " " . $contact->getLastName();
-            $phoneNumber = $contact->getPhoneNumber();
-            echo "<p>$name | $phoneNumber | <a href=\"editContact.php?contactId=$mongoId\">Edit</a> | <a href=\"doDeleteContact.php?contactId=$mongoId\">Delete</a></p>";
-        }
-        ?>
+            foreach ($account->getContacts($filter) as $mongoId => $contact) {
+                $firstName = $contact->getFirstName();
+                $lastName = $contact->getLastName();
+                $job = $contact->getJob();
+                $birthday = $contact->getBirthday();
+                $phoneNumber = $contact->getPhoneNumber();
+                $hobby = $contact->getHobby();
+                $email = $contact->getEmail();
+
+                echo '<tr>';
+                echo "<td>$firstName</td>";
+                echo "<td>$lastName</td>";
+                echo "<td>$job</td>";
+                echo "<td>$birthday</td>";
+                echo "<td>$phoneNumber</td>";
+                echo "<td>$hobby</td>";
+                echo "<td>$email</td>";
+                echo "<td><a href=\"editContact.php?contactId=$mongoId\">Edit</a> | <a href=\"doDeleteContact.php?contactId=$mongoId\">Delete</a></td>";
+                echo '</tr>';
+            }
+            ?>
+        </table>
     </section>
     <footer>
         <p>OnCo - Albert Chmilevski and Adrian Sandru - June 2014</p>

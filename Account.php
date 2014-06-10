@@ -81,11 +81,13 @@ class Account
     {
         $filteredContacts = array();
 
-        foreach ($this->contacts as $key => $contact) {
-            if ($contact->matches($filter))
-                $filteredContacts[$key] = $contact;
+        if(!empty($this->contacts))
+        {
+            foreach ($this->contacts as $key => $contact) {
+                if ($contact->matches($filter))
+                    $filteredContacts[$key] = $contact;
+            }
         }
-
         return $filteredContacts;
     }
 

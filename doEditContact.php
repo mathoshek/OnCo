@@ -11,6 +11,7 @@ $contact->setLastName($_POST['lastName']);
 $contact->setJob($_POST['job']);
 $contact->setBirthday($_POST['birthday']);
 $contact->setPhoneNumber($_POST['phoneNumber']);
+$contact->setHobby($_POST['hobby']);
 $contact->setDescription($_POST['description']);
 $contact->setEmail($_POST['email']);
 
