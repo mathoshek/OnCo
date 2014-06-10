@@ -81,9 +81,9 @@ class Account
     {
         $filteredContacts = array();
 
-        foreach ($this->contacts as $contact) {
+        foreach ($this->contacts as $key => $contact) {
             if ($contact->matches($filter))
-                array_push($filteredContacts, $contact);
+                $filteredContacts[$key] = $contact;
         }
 
         return $filteredContacts;

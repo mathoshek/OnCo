@@ -4,7 +4,7 @@ require_once 'Contact.php';
 
 class ContactsFilter
 {
-    private $filters;
+    private $filters = array();
 
     public function addFirstNameFilter($filter)
     {

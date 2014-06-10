@@ -3,6 +3,7 @@ session_start();
 
 require_once 'Account.php';
 require_once 'Contact.php';
+require_once 'ContactsFilter.php';
 
 if (!isset($_SESSION['user'])) {
     ?>
@@ -70,7 +71,7 @@ if (!isset($_SESSION['user'])) {
     <header>
         <div id="logo">OnCo</div>
         <div id="user_control">
-            <a href="doSignOut.php">Sign Out</a>
+            <p></p><a href="doSignOut.php">Sign Out</a></p>
         </div>
         <div style="clear:both"></div>
     </header>
@@ -82,11 +83,31 @@ if (!isset($_SESSION['user'])) {
     </aside>
     <section id="contentLoggedIn">
         <p><a href='doAddContact.php'>Add a new Contact</a></p>
+        <p><a href='filterContacts.php'>Filter Contacts</a></p>
         <br />
         <?php
+        $filter = new ContactsFilter();
+        if(isset($_GET['firstName']) && !empty($_GET['firstName']))
+            $filter->addFirstNameFilter($_GET['firstName']);
+        if(isset($_GET['lastName']) && !empty($_GET['lastName']))
+            $filter->addFirstNameFilter($_GET['lastName']);
+        if(isset($_GET['job']) && !empty($_GET['job']))
+            $filter->addFirstNameFilter($_GET['job']);
+        if(isset($_GET['birthday']) && !empty($_GET['birthday']))
+            $filter->addFirstNameFilter($_GET['birthday']);
+        if(isset($_GET['phoneNumber']) && !empty($_GET['phoneNumber']))
+            $filter->addFirstNameFilter($_GET['phoneNumber']);
+        if(isset($_GET['hobby']) && !empty($_GET['hobby']))
+            $filter->addFirstNameFilter($_GET['hobby']);
+        if(isset($_GET['description']) && !empty($_GET['description']))
+            $filter->addFirstNameFilter($_GET['description']);
+        if(isset($_GET['email']) && !empty($_GET['email']))
+            $filter->addFirstNameFilter($_GET['email']);
+
+
         $account = Account::get($_SESSION['user']);
 
-        foreach ($account->getAllContacts() as $mongoId => $contact) {
+        foreach ($account->getContacts($filter) as $mongoId => $contact) {
             $name = $contact->getFirstName() . " " . $contact->getLastName();
             $phoneNumber = $contact->getPhoneNumber();
             echo "<p>$name | $phoneNumber | <a href=\"editContact.php?contactId=$mongoId\">Edit</a> | <a href=\"doDeleteContact.php?contactId=$mongoId\">Delete</a></p>";

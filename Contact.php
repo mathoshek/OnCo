@@ -75,68 +75,13 @@ class Contact
 
     public function matches(ContactsFilter $filter)
     {
-    $ret = TRUE;
-        foreach($filter->getFilters() as $key => $filterVal) {
-
-                switch($key){
-
-                    case CONTACT_FIRST_NAME:
-                        if(CONTACT_FIRST_NAME === $key && strcmp(strtolower($this->$key),strtolower($filterVal))===0 && $ret === TRUE)
-                            $ret = TRUE;
-                        else
-                            $ret = FALSE;
-                        break;
-
-                    case CONTACT_LAST_NAME:
-                        if(CONTACT_LAST_NAME === $key && strcmp(strtolower($this->$key),strtolower($filterVal))===0 )
-                            $ret = TRUE;
-                        else
-                            $ret = FALSE;
-                        break;
-
-                    case CONTACT_JOB:
-                        if(CONTACT_JOB === $key && strcmp(strtolower($this->$key),strtolower($filterVal))===0 )
-                           $ret = TRUE;
-                        else
-                            $ret = FALSE;
-                        break;
-
-                    case CONTACT_BIRTHDAY:
-                        if(CONTACT_BIRTHDAY === $key && strcmp($this->$key,strtolower($filterVal))===0 )
-                            $ret = TRUE;
-                        else
-                            $ret = FALSE;
-                        break;
-
-                    case CONTACT_HOBBY:
-                        if(CONTACT_HOBBY === $key && strcmp($this->$key,strtolower($filterVal))===0 )
-                           $ret = TRUE;
-                        else
-                            $ret = FALSE;
-                       break;
-
-                    case CONTACT_EMAIL:
-                        if(CONTACT_EMAIL === $key && strpos($this->$key, $filterVal))
-                            $ret = TRUE;
-                        else
-                            $ret = FALSE;
-                        break;
-
-                    case CONTACT_DESCRIPTION:
-                        if(CONTACT_DESCRIPTION === $key && strpos($this->$key, $filterVal))
-                            $ret = TRUE;
-                        else
-                            $ret = FALSE;
-                        break;
-
-                    case CONTACT_PHONE_NUMBER:
-                        if(CONTACT_PHONE_NUMBER === $key && is_numeric($filterVal))
-                           $ret = TRUE;
-                        else
-                            $ret = FALSE;
-                      break;
-                }
-
+        $ret = true;
+        foreach ($filter->getFilters() as $key => $filterVal) {
+            if (strpos(strtolower((string)$this->$key), strtolower((string)$filterVal)) !== false) {
+                $ret = $ret && true;
+            } else {
+                $ret = $ret && false;
+            }
         }
         return $ret;
     }
